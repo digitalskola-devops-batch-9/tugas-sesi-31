@@ -101,12 +101,8 @@ jobs:
       
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
-        with:
-          args: >
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
-            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   
   k6_smoke_test:
     name: Run K6 Smoke Test
@@ -133,7 +129,7 @@ jobs:
           sudo apt-get install -y k6
       
       - name: Start server
-        run: npm run start
+        run: npm run start &
       
       - name: Run K6 test
         env:
