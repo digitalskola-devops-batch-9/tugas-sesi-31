@@ -10,15 +10,21 @@ const compat = new FlatCompat({
 module.exports = [
   js.configs.recommended,
   ...compat.config({
-    env: { 
-      es2021: true, 
-      node: true, 
-      jest: true 
+    env: {
+      es2021: true,
+      node: true,
+      jest: true,
+    },
+    globals: {
+      __ENV: "readonly",
+      http: "readonly",
+      check: "readonly",
+      sleep: "readonly",
     },
     rules: {
-      "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "no-console": "off",
-      "eqeqeq": ["error", "always"]
-    }
-  })
+      eqeqeq: ["error", "always"],
+    },
+  }),
 ];
